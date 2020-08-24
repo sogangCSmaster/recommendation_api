@@ -6,8 +6,13 @@ var raccoon = require('raccoon');
 router.route('/item')
     .get((req, res, next) => {
         var { userId, limit } = req.query;
+        
         if(!limit){
             limit = 10;
+        }
+        limit = Number(limit);
+        if(limit > 30){
+            limit = 30;
         }
         if(!userId){
             return res.status(400).send({
@@ -41,6 +46,10 @@ router.route('/item')
         }
         if(!limit){
             limit = 10;
+        }
+        limit = Number(limit);
+        if(limit > 30){
+            limit = 30;
         }
         raccoon.liked(userId + '_item12', itemId).then(() => {
             raccoon.recommendFor(userId + '_item12', limit).then((results) => {

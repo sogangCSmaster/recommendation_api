@@ -8,6 +8,10 @@ router.route("/cart")
         if(!limit){
             limit = 10;
         }
+        limit = Number(limit);
+        if(limit > 30){
+            limit = 30;
+        }
         if(!userId){
             return res.status(400).send({
                 status: 'error',
@@ -46,6 +50,10 @@ router.route("/cart")
         }
         if(!limit){
             limit = 10;
+        }
+        limit = Number(limit);
+        if(limit > 30){
+            limit = 30;
         }
         for(var i=0; i<itemList.length; i++){
             await raccoon.liked(userId + '_cart34', itemList[i]);
